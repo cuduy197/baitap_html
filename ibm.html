@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tính IBM</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            font-family: monospace;
+            background: black;
+            color: white;
+            font-size: 15px
+        }
+        
+        input {
+            padding: 1em;
+            color: wheat;
+            background: black;
+            border: 2px solid white;
+        }
+        
+        input:hover {
+            border: 2px solid cyan;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Tính BMI</h1>
+    <div>
+        Cân nặng <input onkeyup="getIbm()" id='weight_input' type="number" placeholder="Nhập cân nặng theo kg"> (kg)
+    </div>
+    <br>
+    <div>
+        Chiều cao: <input onkeyup="getIbm()" id='height_input' type="number" placeholder="Nhập chiều cao theo cm"> (cm)
+    </div>
+    <hr>
+    <h1>Kết quả :
+        <mark id="result">chưa có dữ liệu</mark>
+    </h1>
+    <h1 id="note">
+    </h1>
+
+
+    <script>
+        const getId = (id) => document.getElementById(id);
+        const getIbm = () => {
+            let w = Number(getId('weight_input').value)
+            let h = Number(getId('height_input').value) / 100
+
+            let result = Math.floor(w / (h * h));
+            console.log(result)
+            getId('result').innerHTML = result
+            document.title = `Kết quả : ${result}`
+
+            if (result < 18.5) {
+                getId('note').innerHTML = 'Bạn khá gầy, cố ăn nhiều nhé 😉 '
+            }
+            if (result >= 18.5 && result <= 24.9) {
+                getId('note').innerHTML = 'Bạn bình thường, ráng giữ gìn nhé 😃'
+            }
+
+            if (result >= 25 && result <= 29.9) {
+                getId('note').innerHTML = 'Bạn cần tập thể dục để có vóc dánh bình thường nhé 😊 '
+            }
+            if (result >= 29.9 && result <= 34.9) {
+                getId('note').innerHTML = 'Bạn cần có chế độ ăn uống thích hợp để không tăng cân 🤗 '
+            }
+            if (result >= 35) {
+                getId('note').innerHTML = 'Bạn cần gặp bác sỹ để kiểm soát cân nặng 😮 '
+            }
+        }
+    </script>
+</body>
+
+</html>
