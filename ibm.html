@@ -54,8 +54,12 @@
 
             let result = Math.floor(w / (h * h));
             console.log(result)
-            getId('result').innerHTML = result
-            document.title = `Kết quả : ${result}`
+
+            if (result !== NaN && result !== Infinity) {
+                getId('result').innerHTML = result
+                document.title = `Kết quả : ${result}`
+
+            }
 
             if (result < 18.5) {
                 getId('note').innerHTML = 'Bạn khá gầy, cố ăn nhiều nhé 😉 '
@@ -70,7 +74,7 @@
             if (result >= 29.9 && result <= 34.9) {
                 getId('note').innerHTML = 'Bạn cần có chế độ ăn uống thích hợp để không tăng cân 🤗 '
             }
-            if (result >= 35) {
+            if (resutl !== Infinity && result >= 35) {
                 getId('note').innerHTML = 'Bạn cần gặp bác sỹ để kiểm soát cân nặng 😮 '
             }
         }
