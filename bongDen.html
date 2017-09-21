@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bóng Đèn</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
+    <style>
+        body {
+            margin: 0;
+            font-family: monospace;
+            text-align: center;
+            background: #CFD8DC;
+        }
+        
+        #congTac {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            border: 2px solid black;
+            height: 100px;
+            margin: .2em .1vw;
+            width: 100px;
+            cursor: pointer;
+            outline: none;
+        }
+        
+        .on {
+            background: yellow
+        }
+        
+        .off {
+            background: gray
+        }
+    </style>
+</head>
+
+<body>
+    <h3> Nhấp nháy: <input type="checkbox" id="nhapNhay" onchange="nhapNhay()"> </h3>
+    <h1>Công tắc : <span id="status">Tắt</span></h1>
+    <button title="Bấm để bật/tắt" onclick="batCongTac()" id="congTac" class="off"> </button>
+
+    <script>
+        //hàm getId nhanh
+        var _id = id => document.getElementById(id);
+
+        let congTac = _id("congTac");
+        let status = _id("status");
+
+        const batCongTac = () => {
+
+            let congTac_class = congTac.getAttribute("class")
+
+            if (congTac_class === "off") {
+                status.innerHTML = "Bật"
+                congTac.setAttribute("class", "on")
+                document.body.style.background = "#FFF59D";
+            } else {
+                status.innerHTML = "Tắt"
+                congTac.setAttribute("class", "off")
+                document.body.style.background = "#CFD8DC";
+            }
+
+        }
+
+        const nhapNhay = () => {
+            let nhapNhay = _id("nhapNhay")
+            console.log(nhapNhay.value)
+            if (nhapNhay.value == "on") {
+                nhapNhay.value = "off";
+                this.congTac_interval = setInterval(() => {
+                    batCongTac()
+                }, 200)
+
+            } else {
+                nhapNhay.value = "on";
+
+                clearInterval(this.congTac_interval)
+            }
+        }
+    </script>
+</body>
+
+</html>
